@@ -1,0 +1,156 @@
+﻿@model IEnumerable<WebBookingApp.Models.AvailableDay>
+
+@{
+    ViewData["Title"] = "Available Days";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Days</title>
+    <style>
+        /* ========== Resetare CSS ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        /* ========== Buton Add New Day ========== */
+        .btn-add {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #28a745;
+            color: white;
+            font-size: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-add:hover {
+            background: #218838;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ========== Tabel stilizat ========== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tbody tr {
+            transition: all 0.3s ease-in-out;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ========== Buton Delete animat ========== */
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Available Days</h2>
+
+        <a asp-action="Create" class="btn-add">+ Add New Day</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var day in Model)
+                {
+                    <tr>
+                        <td>@day.Room?.Name</td>
+                        <td>@day.Date.ToShortDateString()</td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@day.Id" class="btn-delete">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

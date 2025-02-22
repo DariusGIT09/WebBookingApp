@@ -1,0 +1,188 @@
+﻿@functions {
+    public object keyframes { get; set; }
+}
+@{
+    Layout = null; // Elimină layout-ul global ca să fie fullscreen
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <style>
+        /* =============== REZETARE DE BAZĂ =============== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* =============== FUNDAL ANIMAT =============== */
+        body {
+            background: linear-gradient(270deg, #ff6a6a, #ffc46a, #ff6a6a);
+            background-size: 600% 600%;
+            animation: gradientBG 10s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* =============== CONTAINER PRINCIPAL LOGIN =============== */
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 40px 30px;
+            width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =============== TITLU =============== */
+        .login-container h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        .login-container h2::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #fff;
+            margin: 8px auto 0 auto;
+        }
+
+        /* =============== FORMULAR =============== */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            color: #fff;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .input-group input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* =============== BUTON SUBMIT CU EFECT HOVER =============== */
+        .btn-submit {
+            background-color: #fff;
+            color: #ff6a6a;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #ff6a6a;
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(255, 106, 106, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* =============== MESAJ DE EROARE =============== */
+        .error-message {
+            background-color: rgba(255, 0, 0, 0.2);
+            color: #fff;
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            animation: shake 0.3s ease;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* =============== RESPONSIVITATE =============== */
+        
+        @{
+            object media = null;
+        }
+        @media (max-width: 400px) {
+            .login-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="error-message">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" name="username" required />
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required />
+            </div>
+
+            <button type="submit" class="btn-submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

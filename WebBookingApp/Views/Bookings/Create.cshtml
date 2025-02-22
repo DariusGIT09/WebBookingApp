@@ -1,0 +1,144 @@
+﻿@model WebBookingApp.Models.Booking
+
+@{
+    ViewData["Title"] = "Create Booking";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Booking</title>
+    <style>
+        /* ======== RESETARE CSS ======== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ======== CONTAINER FORMULAR ======== */
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        /* ======== INPUTURI SI SELECT ======== */
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-group select:focus, 
+        .form-group input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* ======== BUTOANE ANIMATE ======== */
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create Booking</h2>
+
+        <form asp-action="Create">
+            <div class="form-group">
+                <label>Room</label>
+                <select asp-for="RoomId" asp-items="ViewBag.Rooms">
+                    <option value="">Select a Room</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>User</label>
+                <select asp-for="UserId" asp-items="ViewBag.Users">
+                    <option value="">Select a User</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Booking Date</label>
+                <input asp-for="BookingDate" type="date" />
+            </div>
+
+            <button type="submit" class="btn btn-success">Save</button>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - BookingAppWeb</title>
+    <style>
+        /* ======== RESETARE CSS ======== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* ======== HEADER ======== */
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* ======== CONTAINER CENTRAL ======== */
+        .content-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            width: 280px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h5 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ======== BUTOANE ======== */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary {
+            background: #28a745;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #218838;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Welcome to BookingAppWeb</h1>
+    <p>Manage room reservations with ease!</p>
+</div>
+
+<div class="content-container">
+    <div class="card">
+        <h5>Book Rooms</h5>
+        <p>Find and reserve rooms quickly.</p>
+        <a href="@Url.Action("Index", "Rooms")" class="btn btn-outline">Explore Rooms</a>
+    </div>
+
+    <div class="card">
+        <h5>Manage Bookings</h5>
+        <p>View and modify your reservations.</p>
+        <a href="@Url.Action("Index", "Bookings")" class="btn btn-outline">View Bookings</a>
+    </div>
+
+    <div class="card">
+        <h5>Available Days</h5>
+        <p>Check available days for reservations.</p>
+        <a href="@Url.Action("Index", "AvailableDay")" class="btn btn-outline">Check Availability</a>
+    </div>
+</div>
+
+</body>
+</html>

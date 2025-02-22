@@ -1,0 +1,151 @@
+﻿@model IEnumerable<WebBookingApp.Models.Booking>
+
+@{
+    ViewData["Title"] = "Bookings List";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookings</title>
+    <style>
+        /* ======== RESETARE CSS ======== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #536976, #292E49);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* ======== CONTAINER CENTRAL ======== */
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        /* ======== BUTON "ADD BOOKING" ======== */
+        .btn-add {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #28a745;
+            color: white;
+            font-size: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-add:hover {
+            background: #218838;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        /* ======== TABEL STILIZAT ======== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease-in-out;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ======== BUTON DELETE ======== */
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Bookings</h2>
+
+    <a asp-action="Create" class="btn-add">+ Add Booking</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Room</th>
+            <th>User</th>
+            <th>Booking Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.Room?.Name</td>
+                <td>@booking.User?.Name</td>
+                <td>@booking.BookingDate.ToShortDateString()</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@booking.Id" class="btn-delete">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
